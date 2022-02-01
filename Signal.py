@@ -1,15 +1,14 @@
 import numpy as np
-from matplotlib import pyplot as plt
 
 class Signal():
-    def __init__(self, f0, dt, waveletType=None, b=0, noise=False):
+    def __init__(self, f0, dt, waveletType='', b=0, noise=False):
         self.f0 = f0
         self.dt = dt
         self.waveletType = waveletType
-        self.t = np.arange(0, 1/self.f0, self.dt)
         self.b = b
         self.noise = noise
-        self.wavelet = 0
+        self.t = 10*np.arange(-1/self.f0, 1/self.f0, self.dt)
+
 
     def setTypeOfSignal(self):
         self.waveletType = self.waveletType.lower()
@@ -29,10 +28,10 @@ class Signal():
             self.wavelet = np.exp(-self.f0/np.pi*self.t)**2 * \
                 np.sin(self.f0*self.t)
 
-        elif self.waveletType == 'damped_sine':
+        elif self.waveletType == 'dampedsine':
             self.wavelet = np.exp(-self.b*self.t) * np.sin(self.f0*self.t)
 
-        elif self.waveletType == 'damped_cosine':
+        elif self.waveletType == 'dampedcosine':
             self.wavelet = np.exp(-self.b*self.t) * np.cos(self.f0*self.t)
 
         elif self.waveletType == 'sine':
@@ -42,7 +41,7 @@ class Signal():
             self.wavelet = np.cos(2*np.pi*self.f0*self.t)
 
         else:
-            self.wavelet = np.random.rand(self.t)
+            self.wavelet = np.random.rand(self.t.size)
 
         if self.noise:
             self.wavelet += np.random.rand(self.t.size)
