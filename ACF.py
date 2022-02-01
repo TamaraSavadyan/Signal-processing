@@ -14,14 +14,14 @@ class ACF(Signal):
         plt.figure(figsize=(10,10))
         plt.subplot(2,1,1)
         plt.plot(self.t, self.wavelet)
-        plt.xlim((-1/self.f0, 1/self.f0))
-        plt.title('Sinus')
+        # plt.xlim((-1/self.f0, 1/self.f0))
+        plt.title('Signal')
         plt.xlabel('t, s')
         plt.grid()
 
         plt.subplot(2,1,2) 
         plt.plot(lags*self.dt, s_acf) #В plot передается массив сдвигов в секундах, а не в у.е.
-        plt.xlim((-1/self.f0, 1/self.f0))
+       # plt.xlim((-1/self.f0, 1/self.f0))
         plt.title('Autocorrelation')
         plt.xlabel('lags, s')
         plt.grid()
@@ -29,7 +29,7 @@ class ACF(Signal):
         plt.show()
     
 
-s = ACF(50, 0.001, 'sine', noise=True)
+s = ACF(10, 0.0001, waveletType='ricker', b=5)
 s.setTypeOfSignal()
 
 if __name__ == "__main__":
