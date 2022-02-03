@@ -9,7 +9,7 @@ class ZeroPhase(Signal):
     def zeroPhaseTransform(self):
         x0 = ifft(np.abs(fft(self.wavelet)))
 
-        x0_ = np.roll(x0, (self.wavelet.size-1)//2)
-        ti_ = np.arange(-((self.wavelet.size-1)//2), self.wavelet.size//2+1, 1)
+        signal = np.roll(x0, (self.wavelet.size-1)//2)
+        ti = np.arange(-((self.wavelet.size-1)//2), self.wavelet.size//2+1, 1)
 
-        return ti_, x0_ 
+        return signal, ti 
